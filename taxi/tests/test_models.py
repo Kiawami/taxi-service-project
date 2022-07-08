@@ -7,7 +7,7 @@ class ModelTests(TestCase):
     def test_car_str(self):
         manufacturer = Manufacturer.objects.create(name="Test",
                                                    country="Testland")
-        car = Car.objects.create(model="testmodel",)
+        car = Car.objects.create(model="testmodel", manufacturer=manufacturer)
         self.assertEqual(str(car), car.model)
 
     def test_manufacturer_str(self):

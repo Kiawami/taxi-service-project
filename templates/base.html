@@ -18,19 +18,29 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-2">
-
-            {% block sidebar %}
-                {% include "includes/sidebar.html" %}
-            {% endblock %}
-
+              <div class="d-flex" id="wrapper">
+                 <div class="border-end bg-white" id="sidebar-wrapper">
+                    <div class="sidebar-heading border-bottom bg-light">🚕__🚕__🚕__</div>
+                    <div class="list-group list-group-flush">
+                        {% block sidebar %}
+                            {% include "includes/sidebar.html" %}
+                        {% endblock %}
+                    </div>
+                 </div>
+              </div>
         </div>
         <div class="col-sm-10 ">
+             <div class="container-fluid">
 
-            {% block content %}{% endblock %}
+                {% block content %}{% endblock %}
 
-            {% block pagination %}
-                {% include "includes/pagination.html" %}
-            {% endblock %}
+                 {% block pagination %}
+                    {% include "includes/pagination.html" %}
+                 {% endblock %}
+
+
+             </div>
+
 
         </div>
     </div>

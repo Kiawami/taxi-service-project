@@ -1,11 +1,12 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .forms import DriverCreateForm, LicenseUpdateForm
+from .forms import DriverCreateForm, LicenseUpdateForm, DriverSearchForm, CarSearchForm
 from .models import Driver, Car, Manufacturer
 
 
@@ -60,10 +61,31 @@ class CarListView(LoginRequiredMixin, generic.ListView):
     model = Car
     paginate_by = 2
     queryset = Car.objects.all().select_related("manufacturer")
+    context_object_name = "cars_list"
+    template_name = "taxi/car_list.html"
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(CarListView, self).get_context_data(**kwargs)
+        model = self.request.GET.get("model", "")
+
+        context["search_form"] = CarSearchForm(initial={
+            "model": model
+        })
+
+        return context
+
+    def get_queryset(self):
+        model = self.request.GET.get("model")
+
+        if model:
+            return self.queryset.filter(Q(model__icontains=model))
+
+        return self.queryset
 
 
 class CarDetailView(LoginRequiredMixin, generic.DetailView):
     model = Car
+    context_object_name = "cars_detail"
 
 
 class CarCreateView(LoginRequiredMixin, generic.CreateView):
@@ -88,6 +110,28 @@ class CarUpdateView(LoginRequiredMixin, generic.UpdateView):
 class DriverListView(LoginRequiredMixin, generic.ListView):
     model = Driver
     paginate_by = 2
+    queryset = Driver.objects.all().prefetch_related("cars")
+    success_url = reverse_lazy("taxi:driver-list")
+    template_name = "taxi/driver_list.html"
+    context_object_name = "drivers_list"
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(DriverListView, self).get_context_data(**kwargs)
+        username = self.request.GET.get("username", "")
+
+        context["search_form"] = DriverSearchForm(initial={
+            "username": username
+        })
+
+        return context
+
+    def get_queryset(self):
+        username = self.request.GET.get("username")
+
+        if username:
+            return self.queryset.filter(Q(username__icontains=username))
+
+        return self.queryset
 
 
 class DriverDetailView(LoginRequiredMixin, generic.DetailView):

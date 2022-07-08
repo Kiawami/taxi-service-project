@@ -32,3 +32,21 @@ class LicenseUpdateForm(forms.ModelForm):
         license_number = self.cleaned_data["license_number"]
 
         return validate_license_number(license_number)
+
+
+class DriverSearchForm(forms.Form):
+    username = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Write username"})
+    )
+
+
+class CarSearchForm(forms.Form):
+    model = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Write model"})
+    )
