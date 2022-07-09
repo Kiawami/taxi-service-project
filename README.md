@@ -3,6 +3,8 @@
 
 ## Getting started
 [Library project deployed to Heroku](https://taxi-service-project1.herokuapp.com/)
+test user name: serviceadmin
+test user password: serviceadminpassword
 
 # Installation
 ```shell
