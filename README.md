@@ -2,7 +2,7 @@
 > Django project for managing cars and drivers inside the service
 
 ## Getting started
-[Library project deployed to Heroku](https://taxi-service-project1.herokuapp.com/)
+[Taxi service project deployed to Heroku](https://taxi-service-project1.herokuapp.com/)
 
 test user name: serviceadmin
 
