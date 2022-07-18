@@ -1,0 +1,6 @@
+.idea/
+__pycache__/
+db.sqlite3
+taxi/__pycache__/
+taxi/migrations/__pycache__/
+taxi_service/__pycache__/
