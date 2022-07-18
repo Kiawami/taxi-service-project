@@ -6,7 +6,9 @@ from taxi.models import Driver
 
 
 def validate_license_number(license_number):
-    if len(license_number) == 8 and license_number[:3].isupper() \
+    if len(license_number) == 8 \
+            and license_number[:3].isupper() \
+            and license_number[:3].isalpha() \
             and license_number[3:].isdigit():
         return license_number
     raise ValidationError("License number is not correct")
@@ -32,3 +34,21 @@ class LicenseUpdateForm(forms.ModelForm):
         license_number = self.cleaned_data["license_number"]
 
         return validate_license_number(license_number)
+
+
+class CarSearchForm(forms.Form):
+    model = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Search by model.."})
+    )
+
+
+class DriverSearchForm(forms.Form):
+    username = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Search by username.."})
+    )

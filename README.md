@@ -1,3 +1,6 @@
+# taxi_service-project
+Django project for managing taxis and drivers
+
 # Taxi Service Project
 > Django project for managing cars and drivers inside the service
 
