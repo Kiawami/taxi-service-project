@@ -1,3 +1,27 @@
+
 body {
     margin-top: 20px;
+    background-color: #ffffff;
+    font-family: Verdana, Arial, sans-serif;
+    color: black;
+}
+h1, h2{
+    color: #050583;
+    font-family: "Arial Black";
+
+}
+
+.taxi-sidebar-item {
+    background-color: #eef2ff;
+    font-family: Arial;
+}
+
+.grey-item {
+    background-color: #efefef;
+    font-weight: bold;
+}
+
+.green-item {
+    background-color: #f2fcf2;
+    font-weight: bold;
 }
